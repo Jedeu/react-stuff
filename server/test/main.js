@@ -17,3 +17,18 @@ test('GET /', (t) => {
       t.end();
     });
 });
+
+test('GET nonExistentURL', (t) => {
+  request(app)
+  .get ('/nonExistentURL')
+  .expect(404)
+  .expect('Content-Type', /text\/html/)
+  .end((err, res) => {
+    const expectedBody = 'Cannot GET /nonExistentURL\n';
+    const actualBody = res.text;
+
+    t.error(err, 'No error');
+    t.equal(actualBody, expectedBody, 'Retrieve body');
+    t.end();
+  });
+});

@@ -15,8 +15,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.use((err, req, res) => {
-  logger.error(err.stack);
+app.use((err, req, res, next) => {
+  logger.error('unhandled exception error: ', err);
   res.status(500).send(err);
 });
 
